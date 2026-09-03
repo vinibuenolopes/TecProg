@@ -4,7 +4,6 @@
 Pessoa::Pessoa(int diaNa, int mesNa, int anoNa, const char* nome)
 {
 	inicializa(diaNa, mesNa, anoNa, nome);
-	deptoFiliado = nullptr;
 }
 void Pessoa::Calc_Idade(int diaAT, int mesAT, int anoAT)
 {
@@ -29,7 +28,9 @@ void Pessoa::Calc_Idade(int diaAT, int mesAT, int anoAT)
 
 Pessoa::Pessoa() {
 	inicializa(0, 0, 0);
-	deptoFiliado = nullptr;
+	strcpy_s(nomeP, "");
+	pUnivFiliado = NULL;
+	pDptoFiliado = NULL;
 }
 
 void Pessoa::inicializa(int diaNa, int mesNa, int anoNa, const char* nome) {
@@ -37,6 +38,8 @@ void Pessoa::inicializa(int diaNa, int mesNa, int anoNa, const char* nome) {
 	mesP = mesNa;
 	anoP = anoNa;
 	strcpy_s(nomeP, nome);
+	pUnivFiliado = NULL;
+	pDptoFiliado = NULL;
 }
 
 int Pessoa::informaIdade()
@@ -44,32 +47,46 @@ int Pessoa::informaIdade()
 	return idadeP;
 }
 
-void Pessoa::setUnivFiliado(Universidade* pu) 
+void Pessoa::setUnivFiliado(Universidade* pu)
 {
 	pUnivFiliado = pu;
 }
 
 void Pessoa::OndeTrabalha()
 {
-	if (pUnivFiliado) 
+	if (pUnivFiliado)
 	{
 		cout << nomeP << " trabalha para " << pUnivFiliado->getNome() << endl;
 	}
 }
 
-void Pessoa::setDepartamento(Departamento* d)
+void Pessoa::setDepartamento(Departamento* pdep)
 {
-	deptoFiliado = d;
+	pDptoFiliado = pdep;
 }
 
 void Pessoa::OndeTrabalhaDpto()
 {
-	if (deptoFiliado != nullptr)
+	if (pDptoFiliado != NULL)
 	{
-		cout << nomeP << " trabalha no departamento de " << deptoFiliado->getNome() << endl;
+		cout << nomeP << " trabalha para " << pUnivFiliado->getNome() << " no departamento de " << pDptoFiliado->getNome() << endl;
 	}
 	else
 	{
 		cout << nomeP << " ainda nao esta filiado a nenhum departamento." << endl;
 	}
+}
+
+void Pessoa::setNome(char* n)
+{
+	strcpy(nomeP,n);
+}
+
+char* Pessoa::getNome() 
+{
+	return nomeP;
+}
+
+Pessoa::~Pessoa() 
+{
 }

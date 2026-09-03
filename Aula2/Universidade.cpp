@@ -3,7 +3,7 @@
 
 Universidade::Universidade(const char* n)
 {
-	strcpy(nome, n);
+	strcpy(nome, "");
 	depto = nullptr;
 }
 
